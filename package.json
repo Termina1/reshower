@@ -1,0 +1,14 @@
+{
+  "name": "reshower",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "inquirer": "^1.0.2",
+    "lodash.template": "^4.2.5"
+  },
+  "devDependencies": {},
+  "author": "Terimna1",
+  "license": "MIT"
+}
