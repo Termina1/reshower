@@ -47,14 +47,16 @@ function execute(command, nopipe) {
 
 function initStdTheme() {
   return execute("cp node_modules/react-shower/js/presentation.js ./"
-    + "cp node_modules/react-shower/config.json ./"
+    + "&& cp node_modules/react-shower/config.json ./"
     + "&& mkdir -p css"
+    + "&& cp " + path.join(__dirname, "templates/.gitignore ./")
     + "&& cp node_modules/react-shower/css/theme.css ./css");
 }
 
 function initBareTheme(answers) {
   return execute("cp node_modules/react-shower/config.json ./"
     + "&& mkdir -p css"
+    + "&& cp " + path.join(__dirname, "templates/.gitignore ./")
     + "&& cp " + path.join(__dirname, "templates/theme.css") + " ./css")
       .then(function() {
         return readFile(path.join(__dirname, "templates/presentation.js"))
@@ -144,12 +146,14 @@ program
         }).then(function() {
           return buildShower(env.dest);
         }).then(function() {
-          var gcomment = env.comment || "new release";
+          var gcomment = env.comment || "\"new release\"";
           return execute("git add . && git commit -m " + gcomment);
         }).then(function() {
           return execute("git push origin gh-pages");
+        }).catch(function(err) {
+          return true;
         }).then(function() {
-          return execute("git checkout " + branch);
+          return execute("git checkout " + branch, true);
         });
     });
   })
