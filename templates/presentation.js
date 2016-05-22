@@ -6,8 +6,8 @@ import DocumentTitle from "react-document-title";
 
 import "css/theme.css";
 
-const TOPIC = 'Shower Presentation Engine';
-const SPEAKER = (<span>Brought to you by <a href="http://pepelsbey.net">Vadim Makeev</a></span>)
+const TOPIC = '<%= description %>';
+const SPEAKER = '<%= author %>';
 
 export default () =>
   <DocumentTitle title={TOPIC}>

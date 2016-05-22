@@ -8,8 +8,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "react-shower"
+    "start": "react-shower",
+    "build": "react-shower build"
   },
   "author": "<%= author %>",
-  "license": "Creative Commons"
+  "license": "CC-BY-3.0"
 }
