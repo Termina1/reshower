@@ -1,6 +1,7 @@
 var program = require('commander');
 var inquirer = require('inquirer');
 var exec = require('child_process').exec;
+var spawn = require('child_process').spawn;
 var template = require('lodash.template');
 var fs = require('fs');
 var path = require('path');
@@ -15,6 +16,15 @@ function readFile(name) {
       }
     })
   })
+}
+
+function spawnPromise(cmd, args) {
+  return new Promise(function(res, rej) {
+    var pc = spawn(cmd, args);
+    pc.stdout.pipe(process.stdout);
+    pc.stderr.pipe(process.stderr);
+    pc.on('close', res);
+  });
 }
 
 function writeFile(name, value) {
@@ -102,7 +112,7 @@ program
       return writeFile("./package.json", template(tpl, {})(answers))
         .then(function() { return answers });
     }).then(function(answers) {
-      return execute("npm install")
+      return spawnPromise("npm", ["install"])
         .then(function() { return answers });
     }).then(function(answers) {
       if (env.bare) {
@@ -119,7 +129,7 @@ program
   .command("start")
   .description("runs server for development")
   .action(function() {
-    return execute("npm start");
+    return spawnPromise("npm", ["start"]);
   });
 
 program
