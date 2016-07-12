@@ -70,7 +70,9 @@ function buildShower(dest) {
   return execute("npm run build " + dest);
 }
 
-var version = JSON.parse(fs.readFileSync('./package.json')).version;
+var version = JSON.parse(
+  fs.readFileSync(path.join(__dirname, './package.json'))
+).version;
 
 program
   .version(version);
