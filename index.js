@@ -49,14 +49,14 @@ function initStdTheme() {
   return execute("cp node_modules/react-shower/js/presentation.js ./"
     + "&& cp node_modules/react-shower/config.json ./"
     + "&& mkdir -p css"
-    + "&& cp " + path.join(__dirname, "templates/.gitignore ./")
+    + "&& cp " + path.join(__dirname, "templates/gitignore ./.gitignore")
     + "&& cp node_modules/react-shower/css/theme.css ./css");
 }
 
 function initBareTheme(answers) {
   return execute("cp node_modules/react-shower/config.json ./"
     + "&& mkdir -p css"
-    + "&& cp " + path.join(__dirname, "templates/.gitignore ./")
+    + "&& cp " + path.join(__dirname, "templates/gitignore ./.gitignore")
     + "&& cp " + path.join(__dirname, "templates/theme.css") + " ./css")
       .then(function() {
         return readFile(path.join(__dirname, "templates/presentation.js"))
@@ -70,8 +70,10 @@ function buildShower(dest) {
   return execute("npm run build " + dest);
 }
 
+var version = JSON.parse(fs.readFileSync('./package.json')).version;
+
 program
-  .version("1.0.0");
+  .version(version);
 
 program
   .command("init")
