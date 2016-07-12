@@ -1,5 +1,8 @@
 {
   "name": "reshower",
+  "bin": {
+    "reshower": "./bin/reshower.js"
+  },
   "version": "1.1.1",
   "description": "",
   "main": "index.js",
